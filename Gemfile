@@ -1,12 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'compass'
-gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'bootstrap', '~> 5.0.0.beta1'
 
 gem 'kramdown'
-gem 'middleman', '~> 3.1.0'
-gem 'middleman-livereload'
-gem 'middleman-syntax', git: 'git://github.com/middleman/middleman-syntax.git'
+gem 'middleman'
+gem "middleman-syntax"
 gem 'rb-fsevent'
-gem 'pry'
-gem 'middleman-pry'
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?

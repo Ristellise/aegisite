@@ -1,5 +1,5 @@
 require 'kramdown/parser/kramdown'
-require 'middleman-core/sitemap'
+require 'middleman-core/sitemap/store'
 
 module TocReader
   class Kramdown::Parser::TocReader < Kramdown::Parser::Kramdown

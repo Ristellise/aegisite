@@ -1,11 +1,10 @@
-require 'bootstrap-sass'
+require 'bootstrap'
 require 'lib/markdown_extensions'
 require 'lib/subdomain_rewriter'
 require 'lib/toc_reader'
 
 activate :directory_indexes
 activate :automatic_image_sizes
-activate :livereload
 
 set :css_dir, 'static/css'
 set :js_dir, 'static/js'
@@ -35,8 +34,6 @@ set :markdown_engine, :kramdown
 set :markdown,
   input: 'WikiKramdown',
   toc_levels: []
-set :haml,
-  ugly: true
 
 activate :syntax
 

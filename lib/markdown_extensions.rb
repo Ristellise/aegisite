@@ -1,5 +1,5 @@
 require 'kramdown/parser/kramdown'
-require 'middleman-core/sitemap'
+require 'middleman-core/sitemap/store'
 
 module MarkdownExtensions
   class Kramdown::Parser::WikiKramdown < Kramdown::Parser::Kramdown
@@ -72,7 +72,7 @@ module MarkdownExtensions
       el
     end
 
-    def handle_extension(name, opts, body, type)
+    def handle_extension(name, opts, body, type, line_no = nil)
       case name
       when 'template'
         template_name = opts.delete 'name'
@@ -82,7 +82,7 @@ module MarkdownExtensions
         true
       when 'type'
         @tree.children << self.make_header(3, opts.delete('name'))
-        @tree.children << Element.new(:raw, self.process_body(body).call)
+        @tree.children << Element.new(:raw, self.process_body(body).call, location: line_no)
         true
       when 'field'
         self.dl_element(opts, body, 'field')
@@ -95,12 +95,12 @@ module MarkdownExtensions
         @tree.children << self.make_header(3, opts.delete('name'))
         @tree.children << new_block_el(:p)
         add_text('Synopsis: ', @tree.children.last)
-        cs = Element.new(:codespan, opts['synopsis'])
+        cs = Element.new(:codespan, opts['synopsis'], location: line_no)
         cs.attr['class'] = 'language-lua'
         @tree.children.last.children << cs
-        @tree.children << Element.new(:raw, self.process_body(body).call)
+        @tree.children << Element.new(:raw, self.process_body(body).call, location: line_no)
       else
-        super(name, opts, body, type)
+        super(name, opts, body, type, line_no)
       end
     end
   end
